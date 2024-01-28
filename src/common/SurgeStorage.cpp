@@ -282,6 +282,8 @@ SurgeStorage::SurgeStorage(const SurgeStorage::SurgeStorageConfig &config) : oth
     {
         userDataPath = sst::plugininfra::paths::bestDocumentsFolderPathFor(sxt);
     }
+#elif JUCE_IOS
+        userDataPath = File::getSpecialLocation(File::userDocumentsDirectory);
 #endif
 
     userDefaultFilePath = userDataPath;
