@@ -235,13 +235,15 @@ if(APPLE)
   set(cliexe ${cliname}/${PROJECT_NAME}-cli)
   message(STATUS "macOS Standalone includes CLI")
 
-  add_custom_command(
-    TARGET ${PROJECT_NAME}_Standalone
-    POST_BUILD
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    COMMAND echo "Relocating cli executable into Standalone"
-    COMMAND ${CMAKE_COMMAND} -E copy "${cliexe}" "${saname}/Surge XT.app/Contents/MacOS"
-  )
+  if (NOT SURGE_XT_BUILD_AUV3)
+    add_custom_command(
+      TARGET ${PROJECT_NAME}_Standalone
+      POST_BUILD
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+      COMMAND echo "Relocating cli executable into Standalone"
+      COMMAND ${CMAKE_COMMAND} -E copy "${cliexe}" "${saname}/Surge XT.app/Contents/MacOS"
+    )
+  endif()
 endif()
 
 surge_juce_package(${PROJECT_NAME} "Surge XT")
