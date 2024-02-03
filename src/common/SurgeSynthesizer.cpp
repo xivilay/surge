@@ -2025,8 +2025,17 @@ void SurgeSynthesizer::polyAftertouch(char channel, int key, int value)
 
 void SurgeSynthesizer::programChange(char channel, int value)
 {
-    bool increment = value == 127;
-    jogPatchOrCategory(increment, false, true);
+    bool incrementPatch = value == 127;
+    bool decrementPatch = value == 0;
+    if (incrementPatch || decrementPatch) {
+        jogPatchOrCategory(incrementPatch, false, true);
+    }
+    
+    bool incrementCategory = value == 126;
+    bool decrementCategory = value == 1;
+    if (incrementCategory || decrementCategory) {
+        jogPatchOrCategory(incrementCategory, true);
+    }
 }
 
 void SurgeSynthesizer::updateDisplay()
