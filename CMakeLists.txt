@@ -140,6 +140,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
       add_compile_options(
         -faligned-allocation
         -fasm-blocks
+        -Wno-shorten-64-to-32
       )
     endif()
   elseif(CMAKE_CXX_COMPILER_ID MATCHES "^GNU$")

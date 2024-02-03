@@ -54,13 +54,15 @@ function(surge_juce_package target product_name)
       set(dotexe "")
     endif()
 
-    add_custom_command(
-            TARGET ${pkg_target}
-            POST_BUILD
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-            COMMAND echo "${target}: Relocating ${target}-cli executable"
-            COMMAND ${CMAKE_COMMAND} -E copy ${cli_dir}/${target}-cli${dotexe} ${SURGE_PRODUCT_DIR}/
-    )
+    if (NOT SURGE_XT_BUILD_AUV3)
+      add_custom_command(
+              TARGET ${pkg_target}
+              POST_BUILD
+              WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+              COMMAND echo "${target}: Relocating ${target}-cli executable"
+              COMMAND ${CMAKE_COMMAND} -E copy ${cli_dir}/${target}-cli${dotexe} ${SURGE_PRODUCT_DIR}/
+      )
+    endif()
 
   endif()
 
