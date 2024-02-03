@@ -2025,11 +2025,17 @@ void SurgeSynthesizer::polyAftertouch(char channel, int key, int value)
 
 void SurgeSynthesizer::programChange(char channel, int value)
 {
-    PCH = value;
-
-    auto pid = storage.patchIdToMidiBankAndProgram[CC0][PCH];
-    if (pid >= 0)
-        patchid_queue = pid;
+    bool incrementPatch = value == 127;
+    bool decrementPatch = value == 0;
+    if (incrementPatch || decrementPatch) {
+        jogPatchOrCategory(incrementPatch, false, true);
+    }
+    
+    bool incrementCategory = value == 126;
+    bool decrementCategory = value == 1;
+    if (incrementCategory || decrementCategory) {
+        jogPatchOrCategory(incrementCategory, true);
+    }
 }
 
 void SurgeSynthesizer::updateDisplay()

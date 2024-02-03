@@ -220,11 +220,12 @@ void SurgeJUCELookAndFeel::drawDocumentWindowTitleBar(DocumentWindow &window, Gr
     auto wt = window.getName();
 
     String surgeLabel = "Surge XT";
-    String surgeVersion = Surge::Build::FullVersionStr;
+    String surgeVersion = "";
     auto fontSurge = skin->fontManager->getLatoAtSize(14, juce::Font::bold);
     auto fontVersion = skin->fontManager->getFiraMonoAtSize(14, juce::Font::bold);
 
 #if BUILD_IS_DEBUG
+    surgeVersion += Surge::Build::FullVersionStr;
     surgeVersion += " DEBUG";
 #endif
 
