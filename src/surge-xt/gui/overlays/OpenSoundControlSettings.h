@@ -65,24 +65,25 @@ struct OpenSoundControlSettings : public OverlayComponent,
     void onSkinChanged() override;
     void buttonClicked(juce::Button *button) override;
 
+    void textEditorTextChanged(juce::TextEditor &) override;
     void textEditorEscapeKeyPressed(juce::TextEditor &) override;
     void textEditorReturnKeyPressed(juce::TextEditor &) override;
     void textEditorFocusLost(juce::TextEditor &) override;
 
+    void setAllEnableds();
+    bool updateAll();
     bool isInputChanged();
     bool isOutputChanged();
     bool is_number(const std::string &s);
-    void enableOKforChanges();
 
     int validPort(std::string portStr, std::string type);
     bool validateIPString(std::string ipStr);
+    void validateInputs(juce::TextEditor &);
 
     std::unique_ptr<juce::TextEditor> inPort, outPort, outIP;
-    std::unique_ptr<juce::Label> inPortL, outPortL, outIPL;
-    std::unique_ptr<Widgets::SurgeTextButton> inPortReset, outPortReset, outIPReset, ok, cancel;
-
-    // std::unique_ptr<Widgets::SurgeTextButton> showSpec;
-    std::unique_ptr<juce::Label> OSCHeader;
+    std::unique_ptr<juce::Label> inL, outL, outIPL;
+    std::unique_ptr<Widgets::SurgeTextButton> inPortReset, outPortReset, outIPReset, apply, ok,
+        cancel;
 
     std::unique_ptr<juce::ToggleButton> enableOut, enableIn;
 
