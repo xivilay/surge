@@ -45,9 +45,12 @@
 SurgeSynthProcessor::SurgeSynthProcessor()
     : juce::AudioProcessor(BusesProperties()
                                .withOutput("Output", juce::AudioChannelSet::stereo(), true)
+#if ! JUCE_IOS
                                .withInput("Sidechain", juce::AudioChannelSet::stereo(), true)
                                .withOutput("Scene A", juce::AudioChannelSet::stereo(), false)
-                               .withOutput("Scene B", juce::AudioChannelSet::stereo(), false))
+                               .withOutput("Scene B", juce::AudioChannelSet::stereo(), false)
+#endif
+                            )
 {
     // Since we are using 'external clap' this is the one JUCE API we can't override
     std::string wrapperTypeString = getWrapperTypeDescription(wrapperType);
