@@ -4110,18 +4110,16 @@ void loadPatchInBackgroundThread(SurgeSynthesizer *sy)
     if (patchid >= 0)
     {
         Patch p = synth->storage.patch_list[synth->patchid];
-        synth->storage.lastLoadedPatch = p.path.replace_extension();
+        synth->storage.lastLoadedPatch = p.path;
         for (auto &it : synth->patchLoadedListeners)
-            (it.second)(p.path.replace_extension());
+            (it.second)(p.path);
     }
     if (had_patchid_file)
     {
-        synth->storage.lastLoadedPatch = ppath.replace_extension();
+        synth->storage.lastLoadedPatch = ppath;
         for (auto &it : synth->patchLoadedListeners)
-            (it.second)(ppath.replace_extension());
+            (it.second)(ppath);
     }
-
-    synth->storage.lastLoadedPatch = ppath;
 
     // Now we want to null out the patchLoadThread since everything is done
     auto myThread = std::move(synth->patchLoadThread);
@@ -4143,7 +4141,7 @@ void SurgeSynthesizer::processAudioThreadOpsWhenAudioEngineUnavailable(bool dang
         {
             loadPatch(patchid_queue);
             Patch p = storage.patch_list[patchid_queue];
-            storage.lastLoadedPatch = p.path.replace_extension();
+            storage.lastLoadedPatch = p.path;
             patchid_queue = -1;
         }
 
@@ -4166,12 +4164,12 @@ void SurgeSynthesizer::processAudioThreadOpsWhenAudioEngineUnavailable(bool dang
             {
                 loadPatch(ptid);
                 Patch patch = storage.patch_list[ptid];
-                storage.lastLoadedPatch = patch.path.replace_extension();
+                storage.lastLoadedPatch = patch.path;
             }
             else
             {
                 loadPatchByPath(patchid_file, -1, s.c_str());
-                storage.lastLoadedPatch = p.replace_extension();
+                storage.lastLoadedPatch = p;
             }
             patchid_file[0] = 0;
         }
@@ -4997,6 +4995,8 @@ void SurgeSynthesizer::populateDawExtraState()
 
     des.monoPedalMode = storage.monoPedalMode;
     des.oddsoundRetuneMode = storage.oddsoundRetuneMode;
+
+    des.lastLoadedPatch = storage.lastLoadedPatch;
 }
 
 void SurgeSynthesizer::loadFromDawExtraState()
@@ -5109,6 +5109,8 @@ void SurgeSynthesizer::loadFromDawExtraState()
             storage.controllers_chan[i] = des.customcontrol_chan_map[i];
         }
     }
+
+    storage.lastLoadedPatch = des.lastLoadedPatch;
 }
 
 void SurgeSynthesizer::swapMetaControllers(int c1, int c2)

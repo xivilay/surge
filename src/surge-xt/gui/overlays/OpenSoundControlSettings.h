@@ -82,14 +82,13 @@ struct OpenSoundControlSettings : public OverlayComponent,
 
     std::unique_ptr<juce::TextEditor> inPort, outPort, outIP;
     std::unique_ptr<juce::Label> inL, outL, outIPL;
-    std::unique_ptr<Widgets::SurgeTextButton> inPortReset, outPortReset, outIPReset, apply, ok,
-        cancel;
-
+    std::unique_ptr<Widgets::SurgeTextButton> inPortReset, outPortReset, outIPReset, help, apply,
+        ok, cancel;
     std::unique_ptr<juce::ToggleButton> enableOut, enableIn;
 
-    std::unique_ptr<juce::Label> headerLabel;
-
     void setValuesFromEditor();
+
+    bool getRetainOpenStateOnEditorRecreate() override { return false; }
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(OpenSoundControlSettings);
 };
