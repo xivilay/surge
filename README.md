@@ -1,3 +1,15 @@
+# Fork's Notes
+This fork is mostly focused on building Surge for iOS. Ideally it is only needed until official support is made for iOS.
+
+The description of how t can be used may be found in this PR: [#2](https://github.com/xivilay/surge/pull/2)
+
+## Branches
+* `main` branch contains original Surge's changes and should be synced with official branch.
+
+* `ios` branch contains only `ios` related stuff.
+
+* `master` is a primary branch and contains changes from `ios` plus my custom customizations.
+
 # Surge XT
 
 **If you are a musician looking to use Surge XT, please download the appropriate binary
