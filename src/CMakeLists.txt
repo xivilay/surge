@@ -125,7 +125,7 @@ if(DEFINED ENV{ASIOSDK_DIR} OR BUILD_USING_MY_ASIO_LICENSE)
   endif()
 
   target_compile_definitions(surge-juce INTERFACE JUCE_ASIO=1)
-  target_include_directories(surge-juce INTERFACE ${ASIOSDK_DIR}/common)
+  target_include_directories(surge-juce INTERFACE ${ASIOSDK_DIR})
   set(JUCE_ASIO_SUPPORT TRUE)
 endif()
 

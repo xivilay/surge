@@ -348,6 +348,18 @@ Button *SurgeJUCELookAndFeel::createDocumentWindowButton(int buttonType)
     return nullptr;
 }
 
+Component *SurgeJUCELookAndFeel::getParentComponentForMenuOptions(const PopupMenu::Options &options)
+{
+#if JUCE_IOS
+    if (PluginHostType::getPluginLoadedAs() == AudioProcessor::wrapperType_AudioUnitv3)
+    {
+        if (options.getParentComponent() == nullptr && options.getTargetComponent() != nullptr)
+            return options.getTargetComponent()->getTopLevelComponent();
+    }
+#endif
+    return LookAndFeel_V2::getParentComponentForMenuOptions (options);
+}
+
 juce::Font SurgeJUCELookAndFeel::getPopupMenuFont()
 {
     return skin->fontManager->getLatoAtSize(15);
