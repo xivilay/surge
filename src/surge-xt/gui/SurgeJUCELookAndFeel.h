@@ -57,6 +57,8 @@ class SurgeJUCELookAndFeel : public juce::LookAndFeel_V4, public Surge::GUI::Ski
     }
     bool hasStorage() { return !storagePointers.empty(); }
 
+    juce::Component* getParentComponentForMenuOptions (const juce::PopupMenu::Options& options) override;
+
     juce::Font getPopupMenuFont() override;
     juce::Font getPopupMenuBoldFont();
     void drawPopupMenuBackgroundWithOptions(juce::Graphics &g, int w, int h,

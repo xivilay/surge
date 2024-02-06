@@ -89,6 +89,7 @@ build_ios/
 build_lv2/
 buildiwyu/
 buildpy/
+build-*/
 cmake-build-*/
 bwd/
 CMakeUserPresets.json
