@@ -125,8 +125,10 @@ SurgefxAudioProcessorEditor::SurgefxAudioProcessorEditor(SurgefxAudioProcessor &
     setFocusContainerType(juce::Component::FocusContainerType::keyboardFocusContainer);
 
     makeMenu();
+    
     surgeLookFeel.reset(new SurgeLookAndFeel());
     setLookAndFeel(surgeLookFeel.get());
+    juce::LookAndFeel::setDefaultLookAndFeel(surgeLookFeel.get());
 
     picker = std::make_unique<Picker>(this);
     addAndMakeVisibleRecordOrder(picker.get());
