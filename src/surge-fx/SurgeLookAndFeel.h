@@ -230,8 +230,7 @@ class SurgeLookAndFeel : public juce::LookAndFeel_V4
             {
                 auto parent = options.getParentComponent();
                 auto target = options.getTargetComponent();
-                if (parent == nullptr && target != nullptr)
-                    return target->getTopLevelComponent();
+                if (parent == nullptr && target != nullptr) return target->getTopLevelComponent();
             }
         #endif
             return LookAndFeel_V2::getParentComponentForMenuOptions (options);
