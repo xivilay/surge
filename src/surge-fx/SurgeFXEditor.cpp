@@ -578,8 +578,9 @@ void SurgefxAudioProcessorEditor::showMenu()
     auto r = juce::Rectangle<int>().withPosition(
         localPointToGlobal(picker->getBounds().getBottomLeft()));
 
-    o = o.withTargetScreenArea(r).withPreferredPopupDirection(
-        juce::PopupMenu::Options::PopupDirection::downwards);
+    o = o.withTargetScreenArea(r)
+         .withTargetComponent(this)
+         .withPreferredPopupDirection(juce::PopupMenu::Options::PopupDirection::downwards);
 
     p.showMenuAsync(o);
 }
