@@ -125,8 +125,10 @@ SurgefxAudioProcessorEditor::SurgefxAudioProcessorEditor(SurgefxAudioProcessor &
     setFocusContainerType(juce::Component::FocusContainerType::keyboardFocusContainer);
 
     makeMenu();
+    
     surgeLookFeel.reset(new SurgeLookAndFeel());
     setLookAndFeel(surgeLookFeel.get());
+    juce::LookAndFeel::setDefaultLookAndFeel(surgeLookFeel.get());
 
     picker = std::make_unique<Picker>(this);
     addAndMakeVisibleRecordOrder(picker.get());
@@ -576,8 +578,9 @@ void SurgefxAudioProcessorEditor::showMenu()
     auto r = juce::Rectangle<int>().withPosition(
         localPointToGlobal(picker->getBounds().getBottomLeft()));
 
-    o = o.withTargetScreenArea(r).withPreferredPopupDirection(
-        juce::PopupMenu::Options::PopupDirection::downwards);
+    o = o.withTargetScreenArea(r)
+         .withTargetComponent(this)
+         .withPreferredPopupDirection(juce::PopupMenu::Options::PopupDirection::downwards);
 
     p.showMenuAsync(o);
 }

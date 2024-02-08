@@ -353,8 +353,9 @@ Component *SurgeJUCELookAndFeel::getParentComponentForMenuOptions(const PopupMen
 #if JUCE_IOS
     if (PluginHostType::getPluginLoadedAs() == AudioProcessor::wrapperType_AudioUnitv3)
     {
-        if (options.getParentComponent() == nullptr && options.getTargetComponent() != nullptr)
-            return options.getTargetComponent()->getTopLevelComponent();
+        auto parent = options.getParentComponent();
+        auto target = options.getTargetComponent();
+        if (parent == nullptr && target != nullptr) return target->getTopLevelComponent();
     }
 #endif
     return LookAndFeel_V2::getParentComponentForMenuOptions (options);

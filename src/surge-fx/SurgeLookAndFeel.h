@@ -224,6 +224,19 @@ class SurgeLookAndFeel : public juce::LookAndFeel_V4
                                        shouldDrawButtonAsDown);
     }
 
+    juce::Component* getParentComponentForMenuOptions (const juce::PopupMenu::Options& options) override {
+        #if JUCE_IOS
+            if (juce::PluginHostType::getPluginLoadedAs() == juce::AudioProcessor::wrapperType_AudioUnitv3)
+            {
+                auto parent = options.getParentComponent();
+                auto target = options.getTargetComponent();
+                if (parent == nullptr && target != nullptr) return target->getTopLevelComponent();
+            }
+        #endif
+            return LookAndFeel_V2::getParentComponentForMenuOptions (options);
+    };
+
+
     void drawCornerResizer(juce::Graphics &g, int w, int h, bool, bool) override{};
 
     void paintComponentBackground(juce::Graphics &g, int w, int h)
