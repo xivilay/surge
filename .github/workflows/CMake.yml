@@ -2,6 +2,9 @@ name: CMake
 
 on:
   workflow_dispatch:
+  push:
+    tags:
+      - '*'
 
 env:
   BUILD_TYPE: Release
